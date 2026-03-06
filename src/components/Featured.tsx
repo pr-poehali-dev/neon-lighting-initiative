@@ -1,12 +1,13 @@
-import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
+const VIDEO_URL = "https://yandex.ru/video/preview/3740082463171301054";
+
 export default function Featured() {
-  const [videoOpen, setVideoOpen] = useState(false);
+  const openVideo = () => window.open(VIDEO_URL, "_blank");
 
   return (
     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center min-h-screen px-6 py-12 lg:py-0" style={{ background: "linear-gradient(135deg, #fff0f5 0%, #fce4ec 50%, #fff0f5 100%)" }}>
-      <div className="flex-1 h-[400px] lg:h-[800px] mb-8 lg:mb-0 lg:order-2 relative group cursor-pointer" onClick={() => setVideoOpen(true)}>
+      <div className="flex-1 h-[400px] lg:h-[800px] mb-8 lg:mb-0 lg:order-2 relative group cursor-pointer" onClick={openVideo}>
         <img
           src="/images/woman-horse.jpg"
           alt="Подарок для мамы"
@@ -29,10 +30,10 @@ export default function Featured() {
           Мама, ты вдохновляешь меня каждый день — своей добротой, силой и любовью, которую даришь так щедро.
         </p>
         <p className="text-base lg:text-lg mb-8" style={{ color: "#8a4a5a", fontFamily: "'Montserrat', sans-serif", fontWeight: 300 }}>
-          Нажми на видео — я приготовил для тебя кое-что особенное ✨
+          Нажми на кнопку — я приготовил для тебя кое-что особенное ✨
         </p>
         <button
-          onClick={() => setVideoOpen(true)}
+          onClick={openVideo}
           className="px-6 py-3 text-sm transition-all duration-300 cursor-pointer w-fit uppercase tracking-wide"
           style={{ background: "#d4547a", color: "white", border: "none", borderRadius: "2px", fontFamily: "'Montserrat', sans-serif" }}
           onMouseEnter={e => { (e.target as HTMLButtonElement).style.background = "#b03d62"; }}
@@ -41,32 +42,6 @@ export default function Featured() {
           🎁 Открыть Подарок #1
         </button>
       </div>
-
-      {videoOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: "rgba(0,0,0,0.85)" }}
-          onClick={() => setVideoOpen(false)}
-        >
-          <div className="relative w-full max-w-4xl mx-4" onClick={e => e.stopPropagation()}>
-            <button
-              onClick={() => setVideoOpen(false)}
-              className="absolute -top-10 right-0 text-white opacity-70 hover:opacity-100 transition-opacity"
-            >
-              <Icon name="X" size={28} />
-            </button>
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                src="https://yandex.ru/video/preview/3740082463171301054"
-                className="absolute inset-0 w-full h-full"
-                style={{ borderRadius: "4px", border: "none" }}
-                allowFullScreen
-                allow="autoplay; fullscreen"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
